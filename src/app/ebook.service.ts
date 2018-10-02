@@ -11,4 +11,13 @@ export class EbookService {
   getEbooks() {
     return of(EBOOKS);
   }
+
+  searchEbooks(term : string) {
+    if(!term.trim()) {
+      return of(EBOOKS);
+    }
+    return of(EBOOKS.filter(
+      ebook => ebook.tags.find(tag => tag.toLowerCase().includes(term.toLowerCase()))
+    ));
+  }
 }
